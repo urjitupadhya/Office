@@ -1,0 +1,264 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --px-bg:       #0f0f1a;
+  --px-panel:    #1a1a2e;
+  --px-border:   #4a4a8a;
+  --px-accent:   #7c6fff;
+  --px-accent-h: #a08fff;
+  --px-text:     #e8e8f0;
+  --px-muted:    #9090b0;
+  --px-success:  #4ade80;
+  --px-error:    #f87171;
+  --px-shadow:   4px 4px 0px #000;
+  --px-shadow-s: 2px 2px 0px #000;
+}
+
+html, body {
+  height: 100%;
+  background: var(--px-bg);
+  color: var(--px-text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Panels ── */
+.px-panel {
+  background: var(--px-panel);
+  border: 2px solid var(--px-border);
+  box-shadow: var(--px-shadow);
+  padding: 12px;
+  border-radius: 0;
+}
+
+/* ── Buttons ── */
+.px-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--px-panel);
+  color: var(--px-text);
+  border: 2px solid var(--px-border);
+  box-shadow: var(--px-shadow-s);
+  padding: 7px 14px;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background 0.05s, border-color 0.05s;
+  white-space: nowrap;
+  user-select: none;
+}
+.px-btn:hover:not(:disabled) {
+  background: var(--px-accent);
+  border-color: var(--px-accent-h);
+}
+.px-btn:active:not(:disabled) {
+  box-shadow: none;
+  transform: translate(2px, 2px);
+}
+.px-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.px-btn--accent {
+  background: var(--px-accent);
+  border-color: var(--px-accent-h);
+}
+.px-btn--accent:hover:not(:disabled) {
+  background: var(--px-accent-h);
+}
+.px-btn--sm {
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+/* ── Input ── */
+.px-input {
+  background: #0a0a14;
+  color: var(--px-text);
+  border: 2px solid var(--px-border);
+  padding: 7px 12px;
+  font-size: 13px;
+  font-family: inherit;
+  border-radius: 0;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.05s;
+}
+.px-input:focus {
+  border-color: var(--px-accent);
+}
+.px-input::placeholder {
+  color: var(--px-muted);
+}
+
+/* ── Labels ── */
+.px-label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--px-muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+/* ── Floor buttons (elevator) ── */
+.px-floor-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: var(--px-panel);
+  color: var(--px-text);
+  border: 2px solid var(--px-border);
+  padding: 8px 10px;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 0;
+  margin-bottom: 4px;
+  text-align: left;
+  transition: border-color 0.05s, background 0.05s;
+}
+.px-floor-btn:hover {
+  border-color: var(--px-accent);
+}
+.px-floor-btn.active {
+  background: var(--px-accent);
+  border-color: var(--px-accent-h);
+  box-shadow: var(--px-shadow-s);
+}
+
+/* ── Badge ── */
+.px-badge {
+  font-size: 10px;
+  padding: 2px 5px;
+  border: 1px solid currentColor;
+  opacity: 0.75;
+  border-radius: 0;
+}
+
+/* ── Status text ── */
+.px-status {
+  font-size: 12px;
+  color: var(--px-muted);
+  padding: 2px 0;
+}
+.px-status.error   { color: var(--px-error); }
+.px-status.success { color: var(--px-success); }
+
+/* ── Divider ── */
+.px-divider {
+  border: none;
+  border-top: 2px solid var(--px-border);
+  margin: 12px 0;
+}
+
+/* ── Zoom controls group ── */
+.px-zoom-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.px-zoom-label {
+  font-size: 12px;
+  color: var(--px-muted);
+  min-width: 42px;
+  text-align: center;
+}
+
+/* ── Seat bob animation (carried from original) ── */
+@keyframes seat-bob {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-2px); }
+}
+.seat-bob {
+  animation: seat-bob 1.8s steps(2, end) infinite;
+  will-change: transform;
+}
+
+/* ── Sleeping Z float animation for inactive contributors ── */
+@keyframes sleeping-z-float {
+  0%   { transform: translateY(0px) scale(1);   opacity: 1;    }
+  40%  { transform: translateY(-6px) scale(1.1); opacity: 0.9; }
+  70%  { transform: translateY(-10px) scale(1.2); opacity: 0.6; }
+  100% { transform: translateY(-14px) scale(1.3); opacity: 0; }
+}
+.sleeping-z {
+  animation: sleeping-z-float 2.2s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* ── Critical alert animation ── */
+@keyframes critical-pulse {
+  0%, 100% { 
+    transform: scale(1); 
+    filter: drop-shadow(0 0 10px rgba(248, 113, 113, 0.8));
+  }
+  50% { 
+    transform: scale(1.05); 
+    filter: drop-shadow(0 0 15px rgba(248, 113, 113, 1));
+  }
+}
+.critical-alert {
+  animation: critical-pulse 1s infinite;
+}
+
+/* ── Warning pulse animation ── */
+@keyframes warning-pulse {
+  0%, 100% { 
+    transform: scale(1); 
+    filter: drop-shadow(0 0 6px rgba(250, 204, 21, 0.6));
+  }
+  50% { 
+    transform: scale(1.03); 
+    filter: drop-shadow(0 0 10px rgba(250, 204, 21, 0.8));
+  }
+}
+.warning-alert {
+  animation: warning-pulse 2s infinite;
+}
+
+/* ── Points popup animation ── */
+@keyframes points-popup {
+  0% { 
+    transform: translateX(-50%) translateY(-20px) scale(0.5); 
+    opacity: 0; 
+  }
+  50% { 
+    transform: translateX(-50%) translateY(-30px) scale(1.1); 
+    opacity: 1; 
+  }
+  100% { 
+    transform: translateX(-50%) translateY(-40px) scale(1); 
+    opacity: 0; 
+  }
+}
+.points-popup {
+  animation: points-popup 2s ease-out;
+}
+
+/* ── Bed click hover effect ── */
+.bed-interactive:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2);
+  transition: all 0.2s ease;
+}
+
+.bed-interactive:active {
+  transform: scale(0.95);
+  filter: brightness(0.8);
+}
+
+/* ── Blinking cursor for loading ── */
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
